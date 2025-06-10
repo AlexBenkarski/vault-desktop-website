@@ -1,13 +1,304 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vault Desktop - Secure Password Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d2d30 0%, #232326 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 40px 0;
+            border-radius: 16px;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #4CAF50;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+
+        .feature-card p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        /* Why Local Section */
+        .why-local {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .why-local h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .why-local p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .security-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .security-point {
+            background: rgba(76, 175, 80, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .security-point strong {
+            color: #4CAF50;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #4CAF50;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Vault Desktop</h1>
-    <p>Secure, local password management for desktop</p>
-    <a href="https://github.com/YourUsername/TheVault/releases/latest">
-        Download Latest Version
-    </a>
+    <div class="container">
+        <header>
+            <div class="logo-section">
+                <img src="assets/logo.png" alt="Vault Desktop Logo" class="logo">
+                <h1>Vault Desktop</h1>
+            </div>
+            <p class="tagline">Secure Password Management</p>
+            <a href="https://github.com/AlexBenkarski/TheVault/releases/latest" class="download-btn">
+                Download Latest Version
+            </a>
+        </header>
+
+        <section class="features">
+            <div class="container">
+                <h2>Why Vault Desktop?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🔒</span>
+                        <h3>Local Storage Only</h3>
+                        <p>Your passwords stay on your device. No cloud storage, no data breaches, complete privacy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">⚡</span>
+                        <h3>Lightning Fast</h3>
+                        <p>Native desktop performance. Immediate access, no web interface lag.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎮</span>
+                        <h3>Gaming Integration</h3>
+                        <p>Seamless auto-fill for games coming soon!</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🛡️</span>
+                        <h3>Military-Grade Security</h3>
+                        <p>AES-256 encryption with PBKDF2 key derivation. Your data is protected by the same encryption banks use.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">💰</span>
+                        <h3>Completely Free</h3>
+                        <p>No subscriptions, no premium tiers, no hidden costs. Full features, forever free.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🔄</span>
+                        <h3>Auto-Updates</h3>
+                        <p>Stay secure with automatic updates. New features and security patches delivered seamlessly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-local">
+            <h2>Your Data, Your Control</h2>
+            <p>
+                Unlike cloud-based password managers, Vault Desktop keeps everything local. 
+                No servers to hack, no companies to trust, no monthly fees to pay.
+            </p>
+            <div class="security-points">
+                <div class="security-point">
+                    <strong>Zero Knowledge:</strong> We never see your passwords
+                </div>
+                <div class="security-point">
+                    <strong>Offline Access:</strong> Works without internet
+                </div>
+                <div class="security-point">
+                    <strong>No Tracking:</strong> Your privacy is guaranteed
+                </div>
+                <div class="security-point">
+                    <strong>Open Development:</strong> Transparent and trustworthy
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/AlexBenkarski/TheVault">Source Code</a>
+                <a href="https://github.com/AlexBenkarski/TheVault/releases">All Releases</a>
+                <a href="https://github.com/AlexBenkarski/TheVault/issues">Report Bug</a>
+                <a href="mailto:contact@getvaultdesktop.com">Contact</a>
+            </div>
+            <p style="color: #666; font-size: 0.9rem;">
+                © 2025 Vault Desktop. Built for desktop power users.
+            </p>
+        </div>
+    </footer>
 </body>
 </html>
