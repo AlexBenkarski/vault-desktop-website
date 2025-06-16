@@ -1,304 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vault Desktop - Secure Password Manager</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Vault Desktop - Secure Password Manager</title>
+   <style>
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #2d2d30 0%, #232326 100%);
-            color: #ffffff;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+       body {
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           background: linear-gradient(135deg, #1a1a1d 0%, #0f0f10 100%);
+           color: #ffffff;
+           line-height: 1.6;
+           min-height: 100vh;
+       }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+       .container {
+           max-width: 1200px;
+           margin: 0 auto;
+           padding: 0 20px;
+       }
 
-        /* Header */
-        header {
-            padding: 40px 0;
-            text-align: center;
-        }
+       header {
+           padding: 60px 0 40px;
+           text-align: center;
+           border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+       }
 
-        .logo-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
+       .logo-section {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: 20px;
+           margin-bottom: 30px;
+       }
 
-        .logo {
-            width: 64px;
-            height: 64px;
-            border-radius: 12px;
-        }
+       .logo {
+           width: 72px;
+           height: 72px;
+           border-radius: 16px;
+           box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3);
+       }
 
-        h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #ffffff;
-        }
+       h1 {
+           font-size: 3rem;
+           font-weight: 700;
+           color: #ffffff;
+           letter-spacing: -1px;
+       }
 
-        .tagline {
-            font-size: 1.2rem;
-            color: #b0b0b0;
-            margin-bottom: 30px;
-        }
+       .tagline {
+           font-size: 1.4rem;
+           color: #a0a0a0;
+           margin-bottom: 40px;
+           font-weight: 300;
+       }
 
-        .download-btn {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 12px;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+       .trust-badges {
+           display: flex;
+           justify-content: center;
+           gap: 30px;
+           margin: 30px 0 40px;
+           flex-wrap: wrap;
+       }
 
-        .download-btn:hover {
-            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
-        }
+       .trust-badge {
+           background: rgba(76, 175, 80, 0.1);
+           border: 1px solid rgba(76, 175, 80, 0.4);
+           padding: 12px 20px;
+           border-radius: 50px;
+           font-size: 0.9rem;
+           font-weight: 600;
+           color: #4CAF50;
+       }
 
-        /* Features Section */
-        .features {
-            padding: 60px 0;
-            background: rgba(255, 255, 255, 0.05);
-            margin: 40px 0;
-            border-radius: 16px;
-        }
+       .download-section {
+           text-align: center;
+           margin-bottom: 40px;
+       }
 
-        .features h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #4CAF50;
-        }
+       .download-btn {
+           background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+           color: white;
+           padding: 20px 50px;
+           font-size: 1.2rem;
+           font-weight: 700;
+           border: none;
+           border-radius: 16px;
+           text-decoration: none;
+           display: inline-block;
+           transition: all 0.3s ease;
+           text-transform: uppercase;
+           letter-spacing: 1px;
+           box-shadow: 0 12px 40px rgba(76, 175, 80, 0.3);
+       }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
+       .download-btn:hover {
+           background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+           transform: translateY(-3px);
+           box-shadow: 0 16px 50px rgba(76, 175, 80, 0.4);
+       }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-        }
+       .download-info {
+           margin-top: 15px;
+           color: #888;
+           font-size: 0.95rem;
+       }
 
-        .feature-card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-5px);
-        }
+       .hero-message {
+           background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+           border: 1px solid rgba(76, 175, 80, 0.2);
+           border-radius: 20px;
+           padding: 40px;
+           margin: 60px 0;
+           text-align: center;
+       }
 
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
-        }
+       .hero-message h2 {
+           font-size: 2.2rem;
+           margin-bottom: 20px;
+           color: #ffffff;
+           font-weight: 600;
+       }
 
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: #4CAF50;
-        }
+       .hero-message p {
+           font-size: 1.2rem;
+           color: #b0b0b0;
+           max-width: 700px;
+           margin: 0 auto;
+           line-height: 1.7;
+       }
 
-        .feature-card p {
-            color: #b0b0b0;
-            font-size: 0.95rem;
-        }
+       .security-proof {
+           padding: 80px 0;
+           background: rgba(0, 0, 0, 0.3);
+           margin: 60px 0;
+           border-radius: 24px;
+       }
 
-        /* Why Local Section */
-        .why-local {
-            padding: 60px 0;
-            text-align: center;
-        }
+       .security-proof h2 {
+           text-align: center;
+           font-size: 2.5rem;
+           margin-bottom: 20px;
+           color: #4CAF50;
+           font-weight: 700;
+       }
 
-        .why-local h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #4CAF50;
-        }
+       .security-proof .subtitle {
+           text-align: center;
+           font-size: 1.3rem;
+           color: #a0a0a0;
+           margin-bottom: 50px;
+           max-width: 600px;
+           margin-left: auto;
+           margin-right: auto;
+       }
 
-        .why-local p {
-            font-size: 1.1rem;
-            color: #b0b0b0;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
+       .security-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+           gap: 30px;
+           margin-top: 50px;
+       }
 
-        .security-points {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
+       .security-card {
+           background: rgba(255, 255, 255, 0.04);
+           padding: 40px 30px;
+           border-radius: 20px;
+           border: 1px solid rgba(255, 255, 255, 0.08);
+           text-align: center;
+           transition: all 0.3s ease;
+       }
 
-        .security-point {
-            background: rgba(76, 175, 80, 0.1);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(76, 175, 80, 0.3);
-        }
+       .security-card:hover {
+           background: rgba(255, 255, 255, 0.08);
+           border-color: rgba(76, 175, 80, 0.3);
+           transform: translateY(-5px);
+       }
 
-        .security-point strong {
-            color: #4CAF50;
-        }
+       .security-icon {
+           font-size: 3rem;
+           margin-bottom: 20px;
+           display: block;
+       }
 
-        /* Footer */
-        footer {
-            padding: 40px 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 60px;
-        }
+       .security-card h3 {
+           font-size: 1.4rem;
+           margin-bottom: 15px;
+           color: #ffffff;
+           font-weight: 600;
+       }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
+       .security-card p {
+           color: #b0b0b0;
+           font-size: 1rem;
+           line-height: 1.6;
+       }
 
-        .footer-links a {
-            color: #b0b0b0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+       .features {
+           padding: 80px 0;
+       }
 
-        .footer-links a:hover {
-            color: #4CAF50;
-        }
+       .features h2 {
+           text-align: center;
+           font-size: 2.5rem;
+           margin-bottom: 60px;
+           color: #ffffff;
+           font-weight: 700;
+       }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
+       .features-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+           gap: 40px;
+       }
 
-            .tagline {
-                font-size: 1rem;
-            }
+       .feature-card {
+           background: rgba(255, 255, 255, 0.04);
+           padding: 40px;
+           border-radius: 20px;
+           border: 1px solid rgba(255, 255, 255, 0.08);
+           transition: all 0.3s ease;
+       }
 
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
+       .feature-card:hover {
+           background: rgba(255, 255, 255, 0.08);
+           transform: translateY(-5px);
+       }
 
-            .footer-links {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-    </style>
+       .feature-icon {
+           font-size: 2.8rem;
+           margin-bottom: 20px;
+           display: block;
+       }
+
+       .feature-card h3 {
+           font-size: 1.5rem;
+           margin-bottom: 15px;
+           color: #4CAF50;
+           font-weight: 600;
+       }
+
+       .feature-card p {
+           color: #b0b0b0;
+           font-size: 1rem;
+           line-height: 1.7;
+       }
+
+       .versions {
+           padding: 80px 0;
+           background: rgba(0, 0, 0, 0.2);
+           margin: 60px 0;
+           border-radius: 24px;
+       }
+
+       .versions h2 {
+           text-align: center;
+           font-size: 2.2rem;
+           margin-bottom: 15px;
+           color: #4CAF50;
+           font-weight: 700;
+       }
+
+       .versions-subtitle {
+           text-align: center;
+           color: #888;
+           margin-bottom: 50px;
+           font-size: 1.1rem;
+       }
+
+       .version-list {
+           max-width: 800px;
+           margin: 0 auto;
+       }
+
+       .version-item {
+           background: rgba(255, 255, 255, 0.04);
+           border: 1px solid rgba(255, 255, 255, 0.08);
+           border-radius: 16px;
+           margin-bottom: 20px;
+           overflow: hidden;
+           transition: all 0.3s ease;
+       }
+
+       .version-item:hover {
+           border-color: rgba(76, 175, 80, 0.3);
+       }
+
+       .version-header {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           padding: 25px 30px;
+           cursor: pointer;
+           transition: background 0.3s ease;
+       }
+
+       .version-header:hover {
+           background: rgba(255, 255, 255, 0.05);
+       }
+
+       .version-header h3 {
+           color: #ffffff;
+           margin: 0;
+           display: flex;
+           align-items: center;
+           gap: 15px;
+           font-size: 1.3rem;
+           font-weight: 600;
+       }
+
+       .current-badge {
+           background: linear-gradient(135deg, #4CAF50, #45a049);
+           color: white;
+           padding: 4px 12px;
+           border-radius: 20px;
+           font-size: 0.75rem;
+           font-weight: 700;
+           text-transform: uppercase;
+           letter-spacing: 0.5px;
+       }
+
+       .version-links {
+           display: flex;
+           gap: 15px;
+       }
+
+       .version-link {
+           padding: 10px 20px;
+           background: rgba(76, 175, 80, 0.1);
+           color: #4CAF50;
+           text-decoration: none;
+           border-radius: 10px;
+           font-size: 0.9rem;
+           font-weight: 600;
+           transition: all 0.3s ease;
+           border: 1px solid rgba(76, 175, 80, 0.3);
+       }
+
+       .version-link:hover {
+           background: rgba(76, 175, 80, 0.2);
+           color: #ffffff;
+           border-color: rgba(76, 175, 80, 0.5);
+       }
+
+       .patch-notes {
+           padding: 0 30px 30px;
+           border-top: 1px solid rgba(255, 255, 255, 0.08);
+           background: rgba(0, 0, 0, 0.2);
+       }
+
+       .patch-notes.collapsed {
+           display: none;
+       }
+
+       .patch-notes h4 {
+           color: #4CAF50;
+           margin: 25px 0 15px;
+           font-size: 1.1rem;
+           font-weight: 600;
+       }
+
+       .patch-notes ul {
+           margin: 0;
+           padding-left: 20px;
+       }
+
+       .patch-notes li {
+           color: #b0b0b0;
+           margin-bottom: 8px;
+           line-height: 1.6;
+       }
+
+       .all-releases {
+           text-align: center;
+           margin-top: 40px;
+       }
+
+       .all-releases-link {
+           color: #4CAF50;
+           text-decoration: none;
+           font-weight: 600;
+           font-size: 1.1rem;
+           transition: color 0.3s ease;
+       }
+
+       .all-releases-link:hover {
+           color: #45a049;
+       }
+
+       footer {
+           padding: 60px 0;
+           text-align: center;
+           border-top: 1px solid rgba(255, 255, 255, 0.08);
+           margin-top: 80px;
+           background: rgba(0, 0, 0, 0.2);
+       }
+
+       .footer-links {
+           display: flex;
+           justify-content: center;
+           gap: 40px;
+           margin-bottom: 30px;
+           flex-wrap: wrap;
+       }
+
+       .footer-links a {
+           color: #888;
+           text-decoration: none;
+           font-weight: 500;
+           transition: color 0.3s ease;
+       }
+
+       .footer-links a:hover {
+           color: #4CAF50;
+       }
+
+       .copyright {
+           color: #666;
+           font-size: 0.9rem;
+       }
+
+       @media (max-width: 768px) {
+           h1 {
+               font-size: 2.2rem;
+           }
+
+           .tagline {
+               font-size: 1.1rem;
+           }
+
+           .trust-badges {
+               gap: 15px;
+           }
+
+           .trust-badge {
+               font-size: 0.8rem;
+               padding: 10px 16px;
+           }
+
+           .download-btn {
+               padding: 16px 35px;
+               font-size: 1rem;
+           }
+
+           .hero-message h2 {
+               font-size: 1.8rem;
+           }
+
+           .hero-message p {
+               font-size: 1rem;
+           }
+
+           .security-grid,
+           .features-grid {
+               grid-template-columns: 1fr;
+               gap: 25px;
+           }
+
+           .version-header {
+               flex-direction: column;
+               gap: 20px;
+               align-items: flex-start;
+           }
+
+           .version-links {
+               align-self: stretch;
+               justify-content: space-between;
+           }
+
+           .footer-links {
+               flex-direction: column;
+               gap: 20px;
+           }
+       }
+   </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo-section">
-                <img src="assets/logo.png" alt="Vault Desktop Logo" class="logo">
-                <h1>Vault Desktop</h1>
-            </div>
-            <p class="tagline">Secure Password Management</p>
-            <a href="https://github.com/AlexBenkarski/TheVault/releases/latest/download/VaultSetup.exe" class="download-btn">
-                Download Latest Version
-            </a>
-        </header>
+   <div class="container">
+       <header>
+           <div class="logo-section">
+               <img src="assets/logo.png" alt="Vault Desktop" class="logo">
+               <h1>Vault Desktop</h1>
+           </div>
+           <p class="tagline">Enterprise-Grade Password Security for Your Desktop</p>
+           
+           <div class="trust-badges">
+               <div class="trust-badge">🛡️ Bank-Level Encryption</div>
+               <div class="trust-badge">🔒 Local Storage Only</div>
+               <div class="trust-badge">📂 Open Source</div>
+               <div class="trust-badge">🚫 Zero Telemetry</div>
+           </div>
 
-        <section class="features">
-            <div class="container">
-                <h2>Why Vault Desktop?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <span class="feature-icon">🔒</span>
-                        <h3>Local Storage Only</h3>
-                        <p>Your passwords stay on your device. No cloud storage, no data breaches, complete privacy.</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">⚡</span>
-                        <h3>Lightning Fast</h3>
-                        <p>Native desktop performance. Immediate access, no web interface lag.</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🎮</span>
-                        <h3>Gaming Integration</h3>
-                        <p>Seamless auto-fill for games coming soon!</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🛡️</span>
-                        <h3>Military-Grade Security</h3>
-                        <p>AES-256 encryption with PBKDF2 key derivation. Your data is protected by the same encryption banks use.</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">💰</span>
-                        <h3>Completely Free</h3>
-                        <p>No subscriptions, no premium tiers, no hidden costs. Full features, forever free.</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🔄</span>
-                        <h3>Auto-Updates</h3>
-                        <p>Stay secure with automatic updates. New features and security patches delivered seamlessly.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+           <div class="download-section">
+               <a href="#" id="main-download-btn" class="download-btn">
+                   Download Installer
+               </a>
+               <div class="download-info">
+                   Recommended for new users • Windows 10/11 • ~15MB
+               </div>
+           </div>
+       </header>
 
-        <section class="why-local">
-            <h2>Your Data, Your Control</h2>
-            <p>
-                Unlike cloud-based password managers, Vault Desktop keeps everything local. 
-                No servers to hack, no companies to trust, no monthly fees to pay.
-            </p>
-            <div class="security-points">
-                <div class="security-point">
-                    <strong>Zero Knowledge:</strong> We never see your passwords
-                </div>
-                <div class="security-point">
-                    <strong>Offline Access:</strong> Works without internet
-                </div>
-                <div class="security-point">
-                    <strong>No Tracking:</strong> Your privacy is guaranteed
-                </div>
-                <div class="security-point">
-                    <strong>Open Development:</strong> Transparent and trustworthy
-                </div>
-            </div>
-        </section>
-    </div>
+       <section class="hero-message">
+           <h2>Your Passwords Deserve Better</h2>
+           <p>Stop trusting cloud services with your most sensitive data. Vault Desktop keeps everything on your machine, encrypted with military-grade security that even we can't break.</p>
+       </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="https://github.com/AlexBenkarski/TheVault">Source Code</a>
-                <a href="https://github.com/AlexBenkarski/TheVault/releases">All Releases</a>
-                <a href="https://github.com/AlexBenkarski/TheVault/issues">Report Bug</a>
-                <a href="mailto:contact@getvaultdesktop.com">Contact</a>
-            </div>
-            <p style="color: #666; font-size: 0.9rem;">
-                © 2025 Vault Desktop
-            </p>
-        </div>
-    </footer>
+       <section class="security-proof">
+           <div class="container">
+               <h2>Proven Security Architecture</h2>
+               <p class="subtitle">Built with the same encryption standards used by banks and governments worldwide</p>
+               
+               <div class="security-grid">
+                   <div class="security-card">
+                       <span class="security-icon">🔐</span>
+                       <h3>AES-256 Encryption</h3>
+                       <p>Your vault is protected by Advanced Encryption Standard with 256-bit keys. This is the same encryption the NSA uses for top secret documents.</p>
+                   </div>
+                   <div class="security-card">
+                       <span class="security-icon">🎯</span>
+                       <h3>PBKDF2 Key Derivation</h3>
+                       <p>900,000 iterations make brute force attacks computationally impossible. Even quantum computers would need millions of years.</p>
+                   </div>
+                   <div class="security-card">
+                       <span class="security-icon">🏠</span>
+                       <h3>Local Storage Only</h3>
+                       <p>Your encrypted vault never leaves your device. No servers to hack, no data breaches, no unauthorized access. Complete privacy guaranteed.</p>
+                   </div>
+                   <div class="security-card">
+                       <span class="security-icon">🔍</span>
+                       <h3>Open Source Transparency</h3>
+                       <p>Every line of code is public and auditable. Security through transparency, not obscurity. Trust, but verify.</p>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <section class="features">
+           <div class="container">
+               <h2>Essential Features</h2>
+               <div class="features-grid">
+                   <div class="feature-card">
+                       <span class="feature-icon">⚡</span>
+                       <h3>Lightning Performance</h3>
+                       <p>Native desktop application with instant access to your passwords. No web interface lag, no loading screens.</p>
+                   </div>
+                   <div class="feature-card">
+                       <span class="feature-icon">🔄</span>
+                       <h3>Automatic Updates</h3>
+                       <p>Critical security patches and new features delivered automatically. Stay protected without lifting a finger.</p>
+                   </div>
+                   <div class="feature-card">
+                       <span class="feature-icon">🎮</span>
+                       <h3>Gaming Integration</h3>
+                       <p>Seamless auto-fill for games and applications. No more typing passwords during intense gaming sessions.</p>
+                   </div>
+                   <div class="feature-card">
+                       <span class="feature-icon">🆓</span>
+                       <h3>Forever Free</h3>
+                       <p>No subscriptions, no premium tiers, no hidden costs. Full enterprise features available to everyone, permanently.</p>
+                   </div>
+                   <div class="feature-card">
+                       <span class="feature-icon">🔑</span>
+                       <h3>Recovery System</h3>
+                       <p>Military-grade recovery keys ensure you never lose access to your passwords, even if you forget your master password.</p>
+                   </div>
+                   <div class="feature-card">
+                       <span class="feature-icon">🌐</span>
+                       <h3>Offline Access</h3>
+                       <p>Works completely offline. No internet required for password access. Your security doesn't depend on connectivity.</p>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <section class="versions">
+           <div class="container">
+               <h2>Version History</h2>
+               <p class="versions-subtitle">Download previous versions or view what's changed in each release</p>
+               
+               <div id="version-list" class="version-list">
+                   <div class="version-item">
+                       <div class="version-header">
+                           <h3>Loading versions...</h3>
+                       </div>
+                   </div>
+               </div>
+               
+               <div class="all-releases">
+                   <a href="https://github.com/AlexBenkarski/TheVault/releases" class="all-releases-link">
+                       View All Releases on GitHub →
+                   </a>
+               </div>
+           </div>
+       </section>
+   </div>
+
+   <footer>
+       <div class="container">
+           <div class="footer-links">
+               <a href="https://github.com/AlexBenkarski/TheVault">Source Code</a>
+               <a href="https://github.com/AlexBenkarski/TheVault/releases">All Releases</a>
+               <a href="https://github.com/AlexBenkarski/TheVault/issues">Report Bug</a>
+               <a href="mailto:contact@getvaultdesktop.com">Contact</a>
+           </div>
+           <p class="copyright">© 2025 Vault Desktop. Open source password security.</p>
+       </div>
+   </footer>
+
+   <script>
+       async function loadVersions() {
+           try {
+               const response = await fetch('https://api.github.com/repos/AlexBenkarski/TheVault/releases');
+               const releases = await response.json();
+               
+               const versionList = document.getElementById('version-list');
+               versionList.innerHTML = releases.slice(0, 6).map((release, index) => {
+                   const isLatest = index === 0;
+                   const version = release.tag_name;
+                   const notes = parseReleaseNotes(release.body);
+                   
+                   const installerAsset = release.assets.find(a => 
+                       a.name.includes('Setup') || 
+                       a.name.includes('Installer') || 
+                       a.name.includes('VaultSetup')
+                   );
+                   const portableAsset = release.assets.find(a => a.name === 'Vault.exe');
+                   
+                   return `
+                       <div class="version-item">
+                           <div class="version-header" onclick="togglePatchNotes(this)">
+                               <h3>${version} ${isLatest ? '<span class="current-badge">Current</span>' : ''}</h3>
+                               <div class="version-links">
+                                   ${installerAsset ? `<a href="${installerAsset.browser_download_url}" class="version-link installer" onclick="event.stopPropagation()">📦 Installer</a>` : ''}
+                                   ${portableAsset ? `<a href="${portableAsset.browser_download_url}" class="version-link portable" onclick="event.stopPropagation()">💾 Portable</a>` : ''}
+                               </div>
+                           </div>
+                           <div class="patch-notes ${isLatest ? '' : 'collapsed'}">
+                               <h4>What's New:</h4>
+                               ${notes}
+                           </div>
+                       </div>
+                   `;
+               }).join('');
+               
+               if (releases[0]) {
+                   const latestInstaller = releases[0].assets.find(a => 
+                       a.name.includes('Setup') || 
+                       a.name.includes('Installer') || 
+                       a.name.includes('VaultSetup')
+                   );
+                   if (latestInstaller) {
+                       const mainBtn = document.getElementById('main-download-btn');
+                       mainBtn.href = latestInstaller.browser_download_url;
+                       mainBtn.textContent = `Download Installer ${releases[0].tag_name}`;
+                   }
+               }
+               
+           } catch (error) {
+               console.error('Failed to load releases:', error);
+               document.getElementById('version-list').innerHTML = `
+                   <div class="version-item">
+                       <div class="version-header">
+                           <h3>Unable to load version history</h3>
+                           <div class="version-links">
+                               <a href="https://github.com/AlexBenkarski/TheVault/releases/latest" class="version-link installer">📦 Download Latest</a>
+                           </div>
+                       </div>
+                   </div>
+               `;
+           }
+       }
+
+       function parseReleaseNotes(body) {
+           if (!body) return '<p>No release notes available.</p>';
+           
+           const lines = body.split('\n').filter(line => line.trim());
+           let html = '<ul>';
+           
+           for (const line of lines) {
+               const trimmed = line.trim();
+               if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+                   html += `<li>${trimmed.slice(2)}</li>`;
+               } else if (trimmed.startsWith('## ')) {
+                   html += `</ul><h4>${trimmed.slice(3)}</h4><ul>`;
+               } else if (trimmed && !trimmed.startsWith('#')) {
+                   html += `<li>${trimmed}</li>`;
+               }
+           }
+           
+           html += '</ul>';
+           return html;
+       }
+
+       function togglePatchNotes(header) {
+           const patchNotes = header.nextElementSibling;
+           patchNotes.classList.toggle('collapsed');
+       }
+
+       document.addEventListener('DOMContentLoaded', loadVersions);
+   </script>
 </body>
 </html>
