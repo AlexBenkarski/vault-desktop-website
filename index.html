@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vault Desktop - Secure Password Manager</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -619,11 +624,11 @@
         <div class="nav-container">
             <div class="nav-logo">Vault Desktop</div>
             <ul class="nav-links">
-                <li><a onclick="scrollToSection('home')">Home</a></li>
-                <li><a onclick="scrollToSection('security')">Security</a></li>
-                <li><a onclick="scrollToSection('features')">Features</a></li>
-                <li><a onclick="toggleScreenshots()">Screenshots</a></li>
-                <li><a onclick="scrollToSection('versions')">Downloads</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#" onclick="toggleScreenshots(); return false;">Screenshots</a></li>
+                <li><a href="#versions">Downloads</a></li>
             </ul>
             <a href="#" id="nav-download" class="nav-cta">Download</a>
             <button class="mobile-nav-toggle">☰</button>
@@ -709,4 +714,179 @@
                 
                 <div class="coming-soon">
                     <h3>Coming Soon</h3>
-                    <p>Screenshots and interface previews will be
+                    <p>Screenshots and interface previews will be available here soon.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2>Essential Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Fast & Reliable</h3>
+                        <p>Native desktop performance with instant access to your passwords.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Auto Updates</h3>
+                        <p>Security patches and new features delivered automatically.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Gaming Auto-Fill <span class="beta-badge">Beta</span></h3>
+                        <p>Auto-fill credentials directly into games and applications. Currently in beta testing.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Core Features Free</h3>
+                        <p>Essential password management features available at no cost.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Recovery Keys</h3>
+                        <p>Secure recovery system ensures you never lose access to your vault.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Works Offline</h3>
+                        <p>Full functionality without internet connection required.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="versions" class="versions">
+            <div class="container">
+                <h2>Version History</h2>
+                <p class="versions-subtitle">Download previous versions or view release notes</p>
+                
+                <div id="version-list" class="version-list">
+                    <div class="version-item">
+                        <div class="version-header">
+                            <h3>Loading versions...</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="all-releases">
+                    <a href="https://github.com/AlexBenkarski/TheVault/releases" class="all-releases-link">
+                        View All Releases on GitHub →
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/AlexBenkarski/TheVault">Source Code</a>
+                <a href="https://github.com/AlexBenkarski/TheVault/releases">All Releases</a>
+                <a href="https://github.com/AlexBenkarski/TheVault/issues">Report Bug</a>
+                <a href="mailto:contact@getvaultdesktop.com">Contact</a>
+            </div>
+            <p class="copyright">© 2025 Vault Desktop</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleScreenshots() {
+            const screenshotsSection = document.getElementById('screenshots');
+            screenshotsSection.classList.toggle('show');
+            
+            if (screenshotsSection.classList.contains('show')) {
+                screenshotsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        async function loadVersions() {
+            try {
+                const response = await fetch('https://api.github.com/repos/AlexBenkarski/TheVault/releases');
+                const releases = await response.json();
+                
+                const versionList = document.getElementById('version-list');
+                versionList.innerHTML = releases.slice(0, 6).map((release, index) => {
+                    const isLatest = index === 0;
+                    const version = release.tag_name;
+                    const notes = parseReleaseNotes(release.body);
+                    
+                    const installerAsset = release.assets.find(a => 
+                        a.name.includes('Setup') || 
+                        a.name.includes('Installer') || 
+                        a.name.includes('VaultSetup')
+                    );
+                    const portableAsset = release.assets.find(a => a.name === 'Vault.exe');
+                    
+                    return `
+                        <div class="version-item">
+                            <div class="version-header" onclick="togglePatchNotes(this)">
+                                <h3>${version} ${isLatest ? '<span class="current-badge">Current</span>' : ''}</h3>
+                                <div class="version-links">
+                                    ${installerAsset ? `<a href="${installerAsset.browser_download_url}" class="version-link installer" onclick="event.stopPropagation()">Installer</a>` : ''}
+                                    ${portableAsset ? `<a href="${portableAsset.browser_download_url}" class="version-link portable" onclick="event.stopPropagation()">Portable</a>` : ''}
+                                </div>
+                            </div>
+                            <div class="patch-notes ${isLatest ? '' : 'collapsed'}">
+                                <h4>Release Notes:</h4>
+                                ${notes}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                if (releases[0]) {
+                    const latestInstaller = releases[0].assets.find(a => 
+                        a.name.includes('Setup') || 
+                        a.name.includes('Installer') || 
+                        a.name.includes('VaultSetup')
+                    );
+                    if (latestInstaller) {
+                        const mainBtn = document.getElementById('main-download-btn');
+                        const navBtn = document.getElementById('nav-download');
+                        mainBtn.href = latestInstaller.browser_download_url;
+                        navBtn.href = latestInstaller.browser_download_url;
+                        mainBtn.textContent = `Download Installer ${releases[0].tag_name}`;
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Failed to load releases:', error);
+                document.getElementById('version-list').innerHTML = `
+                    <div class="version-item">
+                        <div class="version-header">
+                            <h3>Unable to load version history</h3>
+                            <div class="version-links">
+                                <a href="https://github.com/AlexBenkarski/TheVault/releases/latest" class="version-link installer">Download Latest</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function parseReleaseNotes(body) {
+            if (!body) return '<p>No release notes available.</p>';
+            
+            const lines = body.split('\n').filter(line => line.trim());
+            let html = '<ul>';
+            
+            for (const line of lines) {
+                const trimmed = line.trim();
+                if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+                    html += `<li>${trimmed.slice(2)}</li>`;
+                } else if (trimmed.startsWith('## ')) {
+                    html += `</ul><h4>${trimmed.slice(3)}</h4><ul>`;
+                } else if (trimmed && !trimmed.startsWith('#')) {
+                    html += `<li>${trimmed}</li>`;
+                }
+            }
+            
+            html += '</ul>';
+            return html;
+        }
+
+        function togglePatchNotes(header) {
+            const patchNotes = header.nextElementSibling;
+            patchNotes.classList.toggle('collapsed');
+        }
+
+        document.addEventListener('DOMContentLoaded', loadVersions);
+    </script>
+</body>
+</html>
